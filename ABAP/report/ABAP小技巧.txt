@@ -1,0 +1,26 @@
+
+" 利用binary search快速插入
+" 如果使用binary search 没有找到这条记录会将当前遍历到的位置保存到sy-tabix
+
+types: begin of typ_user,
+         user_name type char10,
+         age       type i,
+       end of typ_user,
+       it_users type table of typ_user with empty key.
+
+data(it_users) =  value it_users( ( user_name = 'elan01' age = 20 )
+                                  ( user_name = 'elan03' age = 30 )
+                                  ( user_name = 'elan06' age = 30 )
+                                  ( user_name = 'elan04' age = 30 )
+                                ) .
+
+data(wa_user) = value typ_user( user_name = 'elan01' age = 10 ) .
+
+sort it_users by user_name .
+
+read table it_users with key user_name = wa_user-user_name transporting no fields binary search .
+if sy-subrc = 0 .
+  insert wa_user into it_users index sy-tabix .
+else .
+  insert wa_user into it_users index sy-tabix .
+endif .

@@ -2,6 +2,9 @@
 -- get information about view
 select view_name, view_type, is_column_view, is_valid from views where view_name = '/1BCAMDP/0BW:DAP:TR_ET090UFZ8T779G8YGWEGXLROU'
 
+-- get an overview about the involved objects (column views, calculation scenarios):
+select view_name, view_type, is_column_view, is_valid from  viewswhere view_name = '0BW:BIA:ZMBMUTST'
+
 -- get details on calculation scenario
 select * from  m_ce_calcscenarios where scenario_name = (
   -- get referenced calculation scenario
